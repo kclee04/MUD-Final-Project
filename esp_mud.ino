@@ -34,6 +34,13 @@ const char *ssid_Router = "WIN Family";
 const char *password_Router = "smileycanoe824";
 const char *mqtt_server = "jimmynguyen.duckdns.org";
 
+// movement variables
+const char north = '2';
+const char east = '6';
+const char south = '8';
+const char west = '4';
+const char quitChar = '0';
+
 void setup() {
   Serial.begin(115200);   // initialize the serial port
 
@@ -62,9 +69,9 @@ void loop() {
   // get the character input
   char keyPressed = myKeypad.getKey();
 
-  if (keyPressed == '2' || keyPressed == '4' || keyPressed == '6' || keyPressed == '8' || keyPressed == '0') {
+  if (keyPressed == north || keyPressed == west || keyPressed == east || keyPressed == south || keyPressed == quitChar) {
 
-    if (keyPressed == '0') {
+    if (keyPressed == quitChar) {
       Serial.println("Quitting game.");
       udp.stop();
       sendMessage(keyPressed);
@@ -115,15 +122,15 @@ void reconnect() {
 
 void sendMessage (char direction) {
   String message;
-  if (direction == '2') {
+  if (direction == north) {
     message = "north";
-  } else if (direction == '6') {
+  } else if (direction == east) {
     message = "east";
-  } else if (direction == '8') {
+  } else if (direction == south) {
     message = "south";
-  } else if (direction == '4') {
+  } else if (direction == west) {
     message = "west";
-  } else if (direction == '0') {
+  } else if (direction == quitChar) {
     message = "quit";
   }
 
