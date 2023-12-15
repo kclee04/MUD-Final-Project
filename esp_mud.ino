@@ -12,7 +12,7 @@ LiquidCrystal_I2C lcd(0x3F,16,2);
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-IPAddress serverIP(34, 69, 169, 183);   
+IPAddress serverIP(34, 69, 169, 183);   // ip for Jimmy's GCP
 const int serverPort = 8888;
 WiFiUDP udp;
 
@@ -30,9 +30,9 @@ byte colPins[4] = {13, 21, 22, 23};
 Keypad myKeypad = Keypad(makeKeymap(keys), rowPins, colPins, 4, 4);
 
 // mqtt variables
-const char *ssid_Router = "Kristie iPhone";
-const char *password_Router = "kristielee";
-const char *mqtt_server = "kristielee.duckdns.org";
+const char *ssid_Router = "WIN Family";
+const char *password_Router = "smileycanoe824";
+const char *mqtt_server = "jimmynguyen.duckdns.org";
 
 void setup() {
   Serial.begin(115200);   // initialize the serial port
@@ -42,7 +42,6 @@ void setup() {
   lcd.init();
   lcd.backlight();
   lcd.setCursor(0, 0);
-  lcd.print("hello world");
   
   // mqtt setup
   client.setServer(mqtt_server, 1883);
@@ -63,16 +62,14 @@ void loop() {
   // get the character input
   char keyPressed = myKeypad.getKey();
 
-  if (keyPressed == '2' || keyPressed == '4' || keyPressed == '8' || keyPressed == '6' || keyPressed == '0') {
-    
+  if (keyPressed == '2' || keyPressed == '4' || keyPressed == '6' || keyPressed == '8' || keyPressed == '0') {
+
     if (keyPressed == '0') {
       Serial.println("Quitting game.");
       udp.stop();
       sendMessage(keyPressed);
       while (1) ;
     }
-    Serial.println(keyPressed);
-
     // send key via UDP
     sendMessage(keyPressed);
   }
@@ -84,7 +81,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     message += (char)payload[i];
   }
-  Serial.println(message);
+  Serial.println(message);    // print description of room to serial monitor - for debugging
   displayMessage(message);
 }
 
@@ -139,8 +136,7 @@ void displayMessage(String message) {
   lcd.init();
   lcd.clear();
 
-  // can remove this line , it causes the lcd to update really slowly
-  // only used to remove null terminator symbol at the end of string
+  // used to remove null terminator symbol at the end of string on LCD display
   message.remove(message.length()-1);
 
   // Maximum characters per line
@@ -162,4 +158,3 @@ void displayMessage(String message) {
     lcd.print(line2.c_str());
   }
 }
-
