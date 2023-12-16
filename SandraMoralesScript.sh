@@ -1,18 +1,15 @@
 #!/bin/bash
 if [ "$#" -eq 1 ]; then
   starting_location="$1"
+  cd $starting_location
+  mkdir startroom
+  cd startroom
 else
   starting_location="$(pwd)"
+  cd $starting_location
+  mkdir north
+  cd north
 fi
-
-# echo "$starting_location"
-
-# create start and connector rooms
-mkdir $starting_location/start_room
-
-# check if start room was created
-if [ $? -eq 0 ]; then
-  cd $starting_location/start_room
   echo "The room is dim with purple hue." > "desc.txt"
 
 #second room
