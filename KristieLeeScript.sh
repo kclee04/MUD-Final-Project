@@ -2,13 +2,16 @@
 
 if [ "$#" -eq 1 ]; then
   starting_location="$1"
+  cd $starting_location
+  mkdir startroom
+  cd startroom
 else
   starting_location="$(pwd)"
+  cd $starting_location
+  mkdir north
+  cd north
 fi
 
-cd $starting_location
-mkdir startroom
-cd startroom
 echo "A cold room" > desc.txt
 
 # second room
