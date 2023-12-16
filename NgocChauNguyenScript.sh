@@ -13,7 +13,6 @@ fi
 
 #check if start room was created
 if [ $? -eq 0 ]; then
-        cd $starting_location/start_room
         echo "Start room." > "desc.txt"
 
         mkdir EAST
