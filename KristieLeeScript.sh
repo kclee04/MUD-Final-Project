@@ -3,13 +3,13 @@
 if [ "$#" -eq 1 ]; then
   starting_location="$1"
   cd $starting_location
-  mkdir startroom
-  cd startroom
+  mkdir north
+  cd north
 else
   starting_location="$(pwd)"
   cd $starting_location
-  mkdir north
-  cd north
+  mkdir startroom
+  cd startroom
 fi
 
 echo "A cold room" > desc.txt
