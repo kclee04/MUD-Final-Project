@@ -1,12 +1,15 @@
 #!/bin/bash
+
+#if path is provided, the connecting start_room will be called NORTH
 if [ "$#" -eq 1 ]; then
         starting_location="$1"
+        mkdir $starting_location/NORTH
+        cd $starting_location/NORTH
 else
         starting_location="$(pwd)"
+        mkdir $starting_location/start_room
+        cd $starting_location/start_room
 fi
-
-#creating start room and connections.
-mkdir $starting_location/start_room
 
 #check if start room was created
 if [ $? -eq 0 ]; then
