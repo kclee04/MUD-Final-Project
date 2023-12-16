@@ -10,7 +10,9 @@ else
   mkdir north
   cd north
 fi
-  echo "The room is dim with purple hue." > "desc.txt"
+
+if [ $? -eq 0 ]; then
+echo "The room is dim with purple hue." > "desc.txt"
 
 #second room
 mkdir east
